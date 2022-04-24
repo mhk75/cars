@@ -1,0 +1,2 @@
+CarName:pride,CarModel:131,Owner:mhk,CarTag:22t33,kilometrfeli:60000,tarikh:10/11/2019,taviz filterroghan:True,taviz filterhava:True,taviz filtercabin:True,taviz safibenzin:True,service vaskazin:TAVIZ_SHOD,kilometr service badi:100000
+CarName:benz,CarModel:e300,Owner:ali,CarTag:44v11,kilometrfeli:70000,tarikh:10/21,taviz filterroghan:False,taviz filterhava:False,taviz filtercabin:False,taviz safibenzin:False,service vaskazin:FULL,kilometr service badi:150000
