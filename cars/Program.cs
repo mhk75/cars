@@ -23,6 +23,7 @@ namespace cars
             }
             while (true)
             {
+                Console.Write(cars[0].CarName);
                 Console.WriteLine("kare khod ra entekhab konid:");
                 Console.WriteLine("1- new car");
                 Console.WriteLine("2- new service");
@@ -68,10 +69,9 @@ namespace cars
 
         private static List<Car> GetCarData(string ReadFile)
         {
-            Car temp_car = new Car();
             List<Car> File_Cars = new List<Car>();
             string[] Temp;
-            
+            int count =0;
             string[] FileData = ReadFile.Split(new string[] { "\r\n", "\r", "\n" },
     StringSplitOptions.None);
             foreach (string i in FileData)
@@ -80,6 +80,7 @@ namespace cars
                 {
                     break;
                 }
+                File_Cars.Add(new Car());
                 Temp = i.Split(',');
                 foreach (string j in Temp)
                 {
@@ -89,44 +90,44 @@ namespace cars
                     switch (controller)
                     {
                         case "CarName:":
-                            temp_car.CarName = value;
+                            File_Cars[count].CarName = value;
                             break;
                         case "CarModel:":
-                            temp_car.CarModel = value;
+                            File_Cars[count].CarModel = value;
                             break;
                         case "Owner:":
-                            temp_car.Owner = value;
+                            File_Cars[count].Owner = value;
                             break;
                         case "CarTag:":
-                            temp_car.CarTag = value;
+                            File_Cars[count].CarTag = value;
                             break;
                         case "tarikh:":
-                            temp_car.CarService.Tarikh = value;
+                            File_Cars[count].CarService.Tarikh = value;
                             break;
                         case "kilometrfeli:":
-                            temp_car.CarService.KilometrFeli = Convert.ToInt32(value);
+                            File_Cars[count].CarService.KilometrFeli = Convert.ToInt32(value);
                             break;
                         case "kilometr service badi:":
-                            temp_car.CarService.KilometrServiceBadi = Convert.ToInt32(value);
+                            File_Cars[count].CarService.KilometrServiceBadi = Convert.ToInt32(value);
                             break;
                         case "taviz filterroghan:":
-                            temp_car.CarService.TavizFilterRoghan = Convert.ToBoolean(value);
+                            File_Cars[count].CarService.TavizFilterRoghan = Convert.ToBoolean(value);
                             break;
                         case "taviz filterhava:":
-                            temp_car.CarService.TavizFilterHava = Convert.ToBoolean(value);
+                            File_Cars[count].CarService.TavizFilterHava = Convert.ToBoolean(value);
                             break;
                         case "taviz filtercabin:":
-                            temp_car.CarService.TavizFilterCabin = Convert.ToBoolean(value);
+                            File_Cars[count].CarService.TavizFilterCabin = Convert.ToBoolean(value);
                             break;
                         case "taviz safibenzin:":
-                            temp_car.CarService.TavizSafiBenzin = Convert.ToBoolean(value);
+                            File_Cars[count].CarService.TavizSafiBenzin = Convert.ToBoolean(value);
                             break;
                         case "service vaskazin:":
-                            temp_car.CarService.ServiceVaskazin = ConvertServiceVaskazin(value);
+                            File_Cars[count].CarService.ServiceVaskazin = ConvertServiceVaskazin(value);
                             break;
                     }
                 }
-                File_Cars.Add(temp_car);
+                count++;
             }
             return File_Cars;
         }
