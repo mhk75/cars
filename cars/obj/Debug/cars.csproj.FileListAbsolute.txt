@@ -12,3 +12,17 @@ H:\projects\c#\Console\test\cars\cars\obj\Debug\cars.csproj.AssemblyReference.ca
 H:\projects\c#\Console\test\cars\cars\obj\Debug\cars.csproj.CoreCompileInputs.cache
 H:\projects\c#\Console\test\cars\cars\obj\Debug\cars.exe
 H:\projects\c#\Console\test\cars\cars\obj\Debug\cars.pdb
+H:\cars\cars\bin\Debug\cars.exe.config
+H:\cars\cars\bin\Debug\cars.exe
+H:\cars\cars\bin\Debug\cars.pdb
+H:\cars\cars\obj\Debug\cars.csproj.AssemblyReference.cache
+H:\cars\cars\obj\Debug\cars.csproj.CoreCompileInputs.cache
+H:\cars\cars\obj\Debug\cars.exe
+H:\cars\cars\obj\Debug\cars.pdb
+H:\projects\c#\Console\test\car-v2\cars\cars\bin\Debug\cars.exe.config
+H:\projects\c#\Console\test\car-v2\cars\cars\bin\Debug\cars.exe
+H:\projects\c#\Console\test\car-v2\cars\cars\bin\Debug\cars.pdb
+H:\projects\c#\Console\test\car-v2\cars\cars\obj\Debug\cars.csproj.AssemblyReference.cache
+H:\projects\c#\Console\test\car-v2\cars\cars\obj\Debug\cars.csproj.CoreCompileInputs.cache
+H:\projects\c#\Console\test\car-v2\cars\cars\obj\Debug\cars.exe
+H:\projects\c#\Console\test\car-v2\cars\cars\obj\Debug\cars.pdb

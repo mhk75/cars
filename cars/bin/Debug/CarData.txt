@@ -1,2 +1,3 @@
 CarName:pride,CarModel:131,Owner:mhk,CarTag:11b22,kilometrfeli:50000,tarikh:01/02/2019,taviz filterroghan:False,taviz filterhava:False,taviz filtercabin:False,taviz safibenzin:False,service vaskazin:TAVIZ_SHOD,kilometr service badi:132000
-CarName:benz,CarModel:e300,Owner:ali,CarTag:22v33,kilometrfeli:70000,tarikh:01/03/2022,taviz filterroghan:False,taviz filterhava:False,taviz filtercabin:False,taviz safibenzin:False,service vaskazin:FULL,kilometr service badi:160000
+CarName:benz,CarModel:e300,Owner:ali,CarTag:22v33,kilometrfeli:70000,tarikh:01/03/2022,taviz filterroghan:False,taviz filterhava:False,taviz filtercabin:False,taviz safibenzin:False,service vaskazin:TAVIZ_SHOD,kilometr service badi:160000
+CarName:peugeot,CarModel:persia,Owner:mohammad,CarTag:88t66,kilometrfeli:78000,tarikh:01/02/2020,taviz filterroghan:True,taviz filterhava:True,taviz filtercabin:True,taviz safibenzin:True,service vaskazin:TAVIZ_SHOD,kilometr service badi:140000

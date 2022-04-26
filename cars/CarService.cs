@@ -14,53 +14,14 @@ namespace cars
             TAKMIL_SHOD,
             TAVIZ_SHOD
         }
-        private string tarikh;
-        public string Tarikh
-        {
-            get { return tarikh; }
-            set { tarikh = value; }
-        }
-        private int kilometrFeli;
-        public int KilometrFeli
-        {
-            get { return kilometrFeli; }
-            set { kilometrFeli = value; }
-        }
-        private bool tavizFilterRoghan;
-        public bool TavizFilterRoghan
-        {
-            get { return tavizFilterRoghan; }
-            set { tavizFilterRoghan = value; }
-        }
-        private bool tavizFilterHava;
-        public bool TavizFilterHava
-        {
-            get { return tavizFilterHava; }
-            set { tavizFilterHava = value; }
-        }
-        private bool tavizFilterCabin;
-        public bool TavizFilterCabin
-        {
-            get { return tavizFilterCabin; }
-            set { tavizFilterCabin = value; }
-        }
-        private bool tavizSafiBenzin;
-        public bool TavizSafiBenzin
-        {
-            get { return tavizSafiBenzin; }
-            set { tavizSafiBenzin = value; }
-        }
-        private Service_Vaskazin serviceVaskazin;
-        public Service_Vaskazin ServiceVaskazin
-        {
-            get { return serviceVaskazin; }
-            set { serviceVaskazin = value; }
-        }
-        private int kilometrServiceBadi;
-        public int KilometrServiceBadi
-        {
-            get { return kilometrServiceBadi; }
-            set { kilometrServiceBadi = value; }
-        }
+        public string Tarikh { get; set; }
+        public int KilometrFeli { get; set; }
+        public bool TavizFilterRoghan { get;set; }
+        public bool TavizFilterHava { get; set; }
+        public bool TavizFilterCabin { get; set; }
+        public bool TavizSafiBenzin { get; set; }
+        public Service_Vaskazin ServiceVaskazin { get; set; }
+        public int KilometrServiceBadi { get; set; }
+        
     }
 }

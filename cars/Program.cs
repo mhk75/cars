@@ -23,12 +23,20 @@ namespace cars
             }
             while (true)
             {
-                Console.Write(cars[0].CarName);
                 Console.WriteLine("kare khod ra entekhab konid:");
                 Console.WriteLine("1- new car");
                 Console.WriteLine("2- new service");
                 Console.WriteLine("3- exit");
-                flag = Convert.ToInt32( Console.ReadLine());
+                try
+                {
+                    flag = Convert.ToInt32(Console.ReadLine());
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("pls enter a valid number:");
+                    flag = Convert.ToInt32(Console.ReadLine());
+                }
+                
                 if (flag == 1)
                 {
                     mycar = GetNewCar();
@@ -60,6 +68,8 @@ namespace cars
                         temp += "\n";
                     }
                     File.WriteAllText("CarData.txt", temp);
+                    
+
                     break;
                 }
             }
@@ -150,7 +160,7 @@ namespace cars
             mycar.CarService.ServiceVaskazin = ConvertServiceVaskazin(Console.ReadLine());
             Console.WriteLine("enter kilometr service badi:");
             mycar.CarService.KilometrServiceBadi = Convert.ToInt32(Console.ReadLine());
-            mycar.Status();
+            mycar.ServiceStatus();
         }
 
         private static Car GetExistingCar(string temp, List<Car> cars)
