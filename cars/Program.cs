@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace cars
 {
@@ -11,15 +12,22 @@ namespace cars
     {
         static void Main(string[] args)
         {
+            FileWriter writer = new FileWriter(); 
             Car mycar = new Car();
             int flag;
             string temp;
             List<Car> cars = new List<Car>();
-            string ReadFile = File.ReadAllText("CarData.txt");
-            Console.WriteLine(ReadFile);
-            if (ReadFile != String.Empty)
+            cars = writer.ReadDataCar();
+            cars = writer.ReadDataService(cars);
+            //byte[] ReadFile = File.ReadAllBytes("test.txt");
+            //Console.WriteLine(fw.ByteArrayToObject(ReadFile)); 
+            //object test = fw.ByteArrayToObject(ReadFile);
+            //Console.WriteLine(test);
+            //string Readfile = File.ReadAllText("cardata.txt");
+            //cars = GetCarData(Readfile);
+            foreach (Car i in cars)
             {
-                cars = GetCarData(ReadFile);
+                i.Status();
             }
             while (true)
             {
@@ -61,15 +69,12 @@ namespace cars
                 }
                 else
                 {
-                    temp = "";
-                    foreach(Car i in cars)
+                    temp = "";                    
+                    /*foreach(Car i in cars)
                     {
-                        temp += i.WriteData();
-                        temp += "\n";
-                    }
-                    File.WriteAllText("CarData.txt", temp);
-                    
-
+                        
+                        writer.WriteData(i.ServiceWriteData());
+                    } */                  
                     break;
                 }
             }
