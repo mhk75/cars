@@ -33,5 +33,15 @@ namespace cars
             Console.WriteLine(string.Format("CarTag: {0}\nkilometrfeli: {1}\ntarikh: {2}\ntaviz filterroghan: {3}\ntaviz filterhava: {4}\ntaviz filtercabin: {5}\ntaviz safibenzin: {6}\nservice vaskazin: {7}\nkilometr service badi: {8}",
                 CarTag, CarService.KilometrFeli, CarService.Tarikh, CarService.TavizFilterRoghan, CarService.TavizFilterHava, CarService.TavizFilterCabin, CarService.TavizSafiBenzin, CarService.ServiceVaskazin, CarService.KilometrServiceBadi));
         }
+        public string ServiceUpdateData()
+        {
+            return string.Format("UPDATE carservice SET tarikh = '{0}', kilometrfeli = {1}, filterroghan = {2}, filterhava = {3}, filtercabin = {4}, safibenzin = {5}, servicevaskazin = '{6}', kilometrservicebadi = {7} WHERE cartag = '{8}'",
+                CarService.Tarikh, CarService.KilometrFeli, CarService.TavizFilterRoghan, CarService.TavizFilterHava, CarService.TavizFilterCabin, CarService.TavizSafiBenzin, CarService.ServiceVaskazin.ToString(), CarService.KilometrServiceBadi, CarTag);
+        }
+        public string DeleteCar()
+        {
+            return string.Format("DELETE FROM car  WHERE tag = '{0}'",
+                CarTag);
+        }
     }
 }

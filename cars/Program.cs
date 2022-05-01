@@ -25,16 +25,14 @@ namespace cars
             //Console.WriteLine(test);
             //string Readfile = File.ReadAllText("cardata.txt");
             //cars = GetCarData(Readfile);
-            foreach (Car i in cars)
-            {
-                i.Status();
-            }
             while (true)
             {
                 Console.WriteLine("kare khod ra entekhab konid:");
                 Console.WriteLine("1- new car");
                 Console.WriteLine("2- new service");
-                Console.WriteLine("3- exit");
+                Console.WriteLine("3- show data");
+                Console.WriteLine("4- remove car data");
+                Console.WriteLine("5- exit");
                 try
                 {
                     flag = Convert.ToInt32(Console.ReadLine());
@@ -49,7 +47,10 @@ namespace cars
                 {
                     mycar = GetNewCar();
                     cars.Add(mycar);
+                    writer.WriteData(mycar.CarWriteData());
+                    writer.WriteData(mycar.ServiceWriteData());
                     Console.WriteLine("new car added successfully");
+                    
                 }
                 else if (flag == 2)
                 {
@@ -60,6 +61,8 @@ namespace cars
                         if (mycar.CarTag == temp)
                         {
                         GetNewService(mycar);
+                        writer.WriteData(mycar.ServiceUpdateData());
+                        Console.WriteLine("data updated successfully");
                         }
                         else
                         {
@@ -67,14 +70,37 @@ namespace cars
                         }
 
                 }
-                else
+                else if(flag == 3)
                 {
-                    temp = "";                    
-                    /*foreach(Car i in cars)
+                    int count = 1;
+                    foreach (Car i in cars)
                     {
-                        
-                        writer.WriteData(i.ServiceWriteData());
-                    } */                  
+                        Console.WriteLine("");
+                        Console.WriteLine(count);
+                        i.Status();
+                        count++;
+                        Console.WriteLine("");
+                    }
+                }
+                else if (flag == 4)
+                {
+                    Console.WriteLine("enter cartag:");
+                    temp = Console.ReadLine();
+                    mycar = GetExistingCar(temp, cars);
+                    if (mycar.CarTag == temp)
+                    {
+                        writer.WriteData(mycar.DeleteCar());
+                        var itemToRemove = cars.Single(r => r.CarTag == temp);
+                        cars.Remove(itemToRemove);
+                        Console.WriteLine("car removed successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine("target car does not exist.");
+                    }
+                }
+                else
+                {                                       
                     break;
                 }
             }
@@ -84,6 +110,7 @@ namespace cars
 
         private static List<Car> GetCarData(string ReadFile)
         {
+            FileWriter writer = new FileWriter();
             List<Car> File_Cars = new List<Car>();
             string[] Temp;
             int count =0;
@@ -138,7 +165,7 @@ namespace cars
                             File_Cars[count].CarService.TavizSafiBenzin = Convert.ToBoolean(value);
                             break;
                         case "service vaskazin:":
-                            File_Cars[count].CarService.ServiceVaskazin = ConvertServiceVaskazin(value);
+                            File_Cars[count].CarService.ServiceVaskazin = writer.ConvertServiceVaskazin(value);
                             break;
                     }
                 }
@@ -149,6 +176,7 @@ namespace cars
 
         private static void GetNewService(Car mycar)
         {
+            FileWriter writer = new FileWriter();
             Console.WriteLine("enter service date:");
             mycar.CarService.Tarikh = Console.ReadLine();
             Console.WriteLine("enter kilometrfeli:");
@@ -162,7 +190,7 @@ namespace cars
             Console.WriteLine("safibenzin taviz shod:(y or n)");
             mycar.CarService.TavizSafiBenzin = ConvertYorNtoBool(Console.ReadLine());
             Console.WriteLine("vaziat vaskazin:(full or takmil or taviz)");
-            mycar.CarService.ServiceVaskazin = ConvertServiceVaskazin(Console.ReadLine());
+            mycar.CarService.ServiceVaskazin = writer.ConvertServiceVaskazin(Console.ReadLine());
             Console.WriteLine("enter kilometr service badi:");
             mycar.CarService.KilometrServiceBadi = Convert.ToInt32(Console.ReadLine());
             mycar.ServiceStatus();
@@ -185,6 +213,7 @@ namespace cars
 
         private static Car GetNewCar()
         {
+            FileWriter writer = new FileWriter();
             Car mycar = new Car();
             Console.WriteLine("enter car name:");
             mycar.CarName = Console.ReadLine();
@@ -207,27 +236,11 @@ namespace cars
             Console.WriteLine("safibenzin taviz shod:(y or n)");
             mycar.CarService.TavizSafiBenzin = ConvertYorNtoBool(Console.ReadLine());
             Console.WriteLine("vaziat vaskazin:(full or takmil or taviz)");
-            mycar.CarService.ServiceVaskazin = ConvertServiceVaskazin(Console.ReadLine());
+            mycar.CarService.ServiceVaskazin = writer.ConvertServiceVaskazin(Console.ReadLine());
             Console.WriteLine("enter kilometr service badi:");
             mycar.CarService.KilometrServiceBadi = Convert.ToInt32(Console.ReadLine());
             mycar.Status();
             return mycar;
-        }
-
-        private static CarService.Service_Vaskazin ConvertServiceVaskazin(string v)
-        {
-            if (v=="full")
-            {
-                return CarService.Service_Vaskazin.FULL;
-            }
-            else if(v=="takmil")
-            {
-                return CarService.Service_Vaskazin.TAKMIL_SHOD;
-            }
-            else
-            {
-                return CarService.Service_Vaskazin.TAVIZ_SHOD;
-            }
         }
 
         private static bool ConvertYorNtoBool(string v)
