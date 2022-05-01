@@ -159,6 +159,43 @@ namespace cars
             }
         }
 
+        public List<Oil> ReadDataOil()
+        {
+            string query = "select * from Oil";
+            int count = 0;
+            List<Oil> File_oils = new List<Oil>();
+            SQLiteConnection Connection = null;
+            try
+            {
+                Connection = new SQLiteConnection(DataBaseLocation);
+                Connection.Open();
+                SQLiteCommand Command = new SQLiteCommand(query, Connection);
+                SQLiteDataReader answer = Command.ExecuteReader();
+                while (answer.Read())
+                {
+                    File_oils.Add(new Oil());
+                    File_oils[count].Name = answer["name"].ToString();
+                    File_oils[count].Type = answer["type"].ToString();
+                    File_oils[count].ID = Convert.ToInt32( answer["id"]);
+                    count++;
+                }
+                return File_oils;
+            }
+            catch (SQLiteException ex)
+            {
+                Console.WriteLine("Error: {0}", ex.ToString());
+                return null;
+            }
+            finally
+            {
+
+                if (Connection != null)
+                {
+                    Connection.Close();
+                }
+
+            }
+        }
 
         public CarService.Service_Vaskazin ConvertServiceVaskazin(string v)
         {

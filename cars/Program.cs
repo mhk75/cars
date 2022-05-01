@@ -14,11 +14,14 @@ namespace cars
         {
             FileWriter writer = new FileWriter(); 
             Car mycar = new Car();
-            int flag;
+            Oil oil = new Oil();
+            int flag,Temp;
             string temp;
             List<Car> cars = new List<Car>();
+            List<Oil> oils = new List<Oil>();
             cars = writer.ReadDataCar();
             cars = writer.ReadDataService(cars);
+            oils = writer.ReadDataOil();
             //byte[] ReadFile = File.ReadAllBytes("test.txt");
             //Console.WriteLine(fw.ByteArrayToObject(ReadFile)); 
             //object test = fw.ByteArrayToObject(ReadFile);
@@ -32,23 +35,22 @@ namespace cars
                 Console.WriteLine("2- new service");
                 Console.WriteLine("3- show data");
                 Console.WriteLine("4- remove car data");
-                Console.WriteLine("5- exit");
-                try
-                {
-                    flag = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("5- new oil");
+                Console.WriteLine("6- show oil list");
+                Console.WriteLine("7- remove oil");
+                Console.WriteLine("8- exit");
+                try { 
+                flag = Convert.ToInt32(Console.ReadLine());
                 }
-                catch (Exception)
+                catch
                 {
-                    Console.WriteLine("pls enter a valid number:");
-                    flag = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("\nplease enter a number.\n");
+                    continue;
                 }
-                
                 if (flag == 1)
                 {
                     mycar = GetNewCar();
                     cars.Add(mycar);
-                    writer.WriteData(mycar.CarWriteData());
-                    writer.WriteData(mycar.ServiceWriteData());
                     Console.WriteLine("new car added successfully");
                     
                 }
@@ -70,7 +72,7 @@ namespace cars
                         }
 
                 }
-                else if(flag == 3)
+                else if (flag == 3)
                 {
                     int count = 1;
                     foreach (Car i in cars)
@@ -99,13 +101,73 @@ namespace cars
                         Console.WriteLine("target car does not exist.");
                     }
                 }
-                else
-                {                                       
+                else if (flag == 5)
+                {
+                    oil = GetNewOil();
+                    writer.WriteData(oil.OilWriteData());
+                    oils.Add(oil);
+                    Console.WriteLine("new oil added successfully");
+                }
+                else if (flag == 6)
+                {
+                    foreach(Oil o in oils)
+                    {
+                        o.Status();
+                    }
+                }
+                else if (flag == 7)
+                {
+                    Console.WriteLine("enter Oil ID:");
+                    Temp = Convert.ToInt32( Console.ReadLine());
+                    oil = GetExistingOil(Temp, oils);
+                    if (oil.ID == Temp)
+                    {
+                        writer.WriteData(oil.DeleteOilData());
+                        var itemToRemove = oils.Single(r => r.ID == Temp);
+                        oils.Remove(itemToRemove);
+                        Console.WriteLine("Oil removed successfully");
+                    }
+                    else
+                    {
+                        Console.WriteLine("target Oil does not exist.");
+                    }
+                }
+                else if (flag == 8)
+                {
                     break;
+                }
+                else
+                {
+                    Console.WriteLine("\npls enter a valid number.\n");
                 }
             }
             
             
+        }
+
+        private static Oil GetExistingOil(int temp, List<Oil> oils)
+        {
+            Oil TempOil = new Oil();
+            foreach (Oil i in oils)
+            {
+                if (i.ID == temp)
+                {
+                    TempOil = i;
+                    break;
+                }
+
+            }
+            return TempOil;
+        }
+
+        private static Oil GetNewOil()
+        {
+            Oil oil = new Oil();
+            Console.WriteLine("enter oil name:");
+            oil.Name = Console.ReadLine();
+            Console.WriteLine("enter oil type");
+            oil.Type = Console.ReadLine();
+            return oil;
         }
 
         private static List<Car> GetCarData(string ReadFile)
@@ -239,6 +301,8 @@ namespace cars
             mycar.CarService.ServiceVaskazin = writer.ConvertServiceVaskazin(Console.ReadLine());
             Console.WriteLine("enter kilometr service badi:");
             mycar.CarService.KilometrServiceBadi = Convert.ToInt32(Console.ReadLine());
+            writer.WriteData(mycar.CarWriteData());
+            writer.WriteData(mycar.ServiceWriteData());
             mycar.Status();
             return mycar;
         }
