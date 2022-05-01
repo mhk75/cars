@@ -117,7 +117,6 @@ namespace cars
         public List<Car> ReadDataService(List<Car> File_Cars)
         {
             string query = "select * from carservice";
-            int count = 0;
             SQLiteConnection Connection = null;
             try
             {
@@ -161,13 +160,13 @@ namespace cars
         }
 
 
-        private static CarService.Service_Vaskazin ConvertServiceVaskazin(string v)
+        public CarService.Service_Vaskazin ConvertServiceVaskazin(string v)
         {
-            if (v == "FULL")
+            if (v == "FULL" || v == "full" || v == "0")
             {
                 return CarService.Service_Vaskazin.FULL;
             }
-            else if (v == "TAKMIL_SHOD")
+            else if (v == "TAKMIL_SHOD" || v == "takmil" || v == "1")
             {
                 return CarService.Service_Vaskazin.TAKMIL_SHOD;
             }
