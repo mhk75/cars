@@ -49,20 +49,19 @@ namespace cars
                 }
                 if (flag == 1)
                 {
-                    mycar = GetNewCar();
+                    mycar = GetNewCar(oils);
                     cars.Add(mycar);
                     Console.WriteLine("new car added successfully");
                     
                 }
                 else if (flag == 2)
                 {
-                
                         Console.WriteLine("enter cartag:");
                         temp = Console.ReadLine();
                         mycar = GetExistingCar(temp,cars);
                         if (mycar.CarTag == temp)
                         {
-                        GetNewService(mycar);
+                        GetNewService(mycar,oils);
                         writer.WriteData(mycar.ServiceUpdateData());
                         Console.WriteLine("data updated successfully");
                         }
@@ -70,7 +69,6 @@ namespace cars
                         {
                             Console.WriteLine("target car does not exist.");
                         }
-
                 }
                 else if (flag == 3)
                 {
@@ -110,10 +108,8 @@ namespace cars
                 }
                 else if (flag == 6)
                 {
-                    foreach(Oil o in oils)
-                    {
-                        o.Status();
-                    }
+                    ShowOils(oils);
+                    
                 }
                 else if (flag == 7)
                 {
@@ -138,11 +134,19 @@ namespace cars
                 }
                 else
                 {
-                    Console.WriteLine("\npls enter a valid number.\n");
+                    Console.WriteLine("\npelease enter a valid number.\n");
                 }
             }
             
             
+        }
+
+        private static void ShowOils(List<Oil> oils)
+        {
+            foreach (Oil o in oils)
+            {
+                o.Status();
+            }
         }
 
         private static Oil GetExistingOil(int temp, List<Oil> oils)
@@ -155,7 +159,6 @@ namespace cars
                     TempOil = i;
                     break;
                 }
-
             }
             return TempOil;
         }
@@ -165,7 +168,7 @@ namespace cars
             Oil oil = new Oil();
             Console.WriteLine("enter oil name:");
             oil.Name = Console.ReadLine();
-            Console.WriteLine("enter oil type");
+            Console.WriteLine("enter oil type:");
             oil.Type = Console.ReadLine();
             return oil;
         }
@@ -236,7 +239,7 @@ namespace cars
             return File_Cars;
         }
 
-        private static void GetNewService(Car mycar)
+        private static void GetNewService(Car mycar,List<Oil> oils)
         {
             FileWriter writer = new FileWriter();
             Console.WriteLine("enter service date:");
@@ -251,10 +254,18 @@ namespace cars
             mycar.CarService.TavizFilterCabin = ConvertYorNtoBool(Console.ReadLine());
             Console.WriteLine("safibenzin taviz shod:(y or n)");
             mycar.CarService.TavizSafiBenzin = ConvertYorNtoBool(Console.ReadLine());
-            Console.WriteLine("vaziat vaskazin:(full or takmil or taviz)");
-            mycar.CarService.ServiceVaskazin = writer.ConvertServiceVaskazin(Console.ReadLine());
             Console.WriteLine("enter kilometr service badi:");
             mycar.CarService.KilometrServiceBadi = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("vaziat vaskazin:(full or takmil or taviz)");
+            mycar.CarService.ServiceVaskazin = writer.ConvertServiceVaskazin(Console.ReadLine());
+            if (mycar.CarService.ServiceVaskazin == CarService.Service_Vaskazin.TAVIZ_SHOD)
+            {
+                ShowOils(oils);
+                Console.WriteLine("pelease enter your Oil ID:\n");
+                int temp = Convert.ToInt32(Console.ReadLine());
+                mycar.CarService.oil =  GetExistingOil(temp, oils);
+            }
+            
             mycar.ServiceStatus();
         }
 
@@ -273,7 +284,7 @@ namespace cars
             return TempCar;
         }
 
-        private static Car GetNewCar()
+        private static Car GetNewCar(List<Oil> oils)
         {
             FileWriter writer = new FileWriter();
             Car mycar = new Car();
@@ -297,10 +308,17 @@ namespace cars
             mycar.CarService.TavizFilterCabin = ConvertYorNtoBool(Console.ReadLine());
             Console.WriteLine("safibenzin taviz shod:(y or n)");
             mycar.CarService.TavizSafiBenzin = ConvertYorNtoBool(Console.ReadLine());
-            Console.WriteLine("vaziat vaskazin:(full or takmil or taviz)");
-            mycar.CarService.ServiceVaskazin = writer.ConvertServiceVaskazin(Console.ReadLine());
             Console.WriteLine("enter kilometr service badi:");
             mycar.CarService.KilometrServiceBadi = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("vaziat vaskazin:(full or takmil or taviz)");
+            mycar.CarService.ServiceVaskazin = writer.ConvertServiceVaskazin(Console.ReadLine());
+            if (mycar.CarService.ServiceVaskazin == CarService.Service_Vaskazin.TAVIZ_SHOD)
+            {
+                ShowOils(oils);
+                Console.WriteLine("pelease enter your Oil ID:\n");
+                int temp = Convert.ToInt32(Console.ReadLine());
+                mycar.CarService.oil =  GetExistingOil(temp, oils);
+            }
             writer.WriteData(mycar.CarWriteData());
             writer.WriteData(mycar.ServiceWriteData());
             mycar.Status();

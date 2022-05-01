@@ -22,7 +22,7 @@ namespace cars
         public bool TavizSafiBenzin { get; set; }
         public Service_Vaskazin ServiceVaskazin { get; set; }
         public int KilometrServiceBadi { get; set; }
-        public int OilID { set; get; }
+        public Oil oil { get; set; } = new Oil();
         
     }
 }

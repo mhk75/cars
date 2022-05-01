@@ -116,7 +116,7 @@ namespace cars
 
         public List<Car> ReadDataService(List<Car> File_Cars)
         {
-            string query = "select * from carservice";
+            string query = "select * from carservice inner join Oil on Oil.OilID = carservice.OilID";
             SQLiteConnection Connection = null;
             try
             {
@@ -138,6 +138,9 @@ namespace cars
                             car.CarService.TavizSafiBenzin = Convert.ToBoolean(answer["safibenzin"]);
                             car.CarService.KilometrFeli = Convert.ToInt32( answer["kilometrfeli"]);
                             car.CarService.KilometrServiceBadi = Convert.ToInt32(answer["kilometrservicebadi"]);
+                            car.CarService.oil.ID = Convert.ToInt32(answer["OilID"]);
+                            car.CarService.oil.Name = answer["name"].ToString();
+                            car.CarService.oil.Type = answer["type"].ToString();
                         }
                     }
                 }
@@ -176,7 +179,7 @@ namespace cars
                     File_oils.Add(new Oil());
                     File_oils[count].Name = answer["name"].ToString();
                     File_oils[count].Type = answer["type"].ToString();
-                    File_oils[count].ID = Convert.ToInt32( answer["id"]);
+                    File_oils[count].ID = Convert.ToInt32( answer["OilID"]);
                     count++;
                 }
                 return File_oils;

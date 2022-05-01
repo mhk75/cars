@@ -15,9 +15,10 @@ namespace cars
         public string CarTag { get; set; }
         public void Status()
         {
-            Console.WriteLine( string.Format("CarName: {0}\nCarModel: {1}\nOwner: {2}\nCarTag: {3}\nkilometrfeli: {4}\ntarikh: {5}\ntaviz filterroghan: {6}\ntaviz filterhava: {7}\ntaviz filtercabin: {8}\ntaviz safibenzin: {9}\nservice vaskazin: {10}\nkilometr service badi: {11}",
-                CarName,CarModel,Owner,CarTag,CarService.KilometrFeli,CarService.Tarikh,CarService.TavizFilterRoghan,CarService.TavizFilterHava,CarService.TavizFilterCabin,CarService.TavizSafiBenzin,CarService.ServiceVaskazin,CarService.KilometrServiceBadi));
+            Console.WriteLine( string.Format("CarName: {0}\nCarModel: {1}\nOwner: {2}\nCarTag: {3}\nkilometrfeli: {4}\ntarikh: {5}\ntaviz filterroghan: {6}\ntaviz filterhava: {7}\ntaviz filtercabin: {8}\ntaviz safibenzin: {9}\nservice vaskazin: {10}\nkilometr service badi: {11}\noil name: {12}\noil type: {13}\n",
+                CarName,CarModel,Owner,CarTag,CarService.KilometrFeli,CarService.Tarikh,CarService.TavizFilterRoghan,CarService.TavizFilterHava,CarService.TavizFilterCabin,CarService.TavizSafiBenzin,CarService.ServiceVaskazin,CarService.KilometrServiceBadi, CarService.oil.Name, CarService.oil.Type));
         }
+
         public string CarWriteData()
         {
             return string.Format("insert into car(name,model,owner,tag) values('{0}','{1}','{2}','{3}')",
@@ -30,8 +31,8 @@ namespace cars
         }
         public void ServiceStatus()
         {
-            Console.WriteLine(string.Format("CarTag: {0}\nkilometrfeli: {1}\ntarikh: {2}\ntaviz filterroghan: {3}\ntaviz filterhava: {4}\ntaviz filtercabin: {5}\ntaviz safibenzin: {6}\nservice vaskazin: {7}\nkilometr service badi: {8}",
-                CarTag, CarService.KilometrFeli, CarService.Tarikh, CarService.TavizFilterRoghan, CarService.TavizFilterHava, CarService.TavizFilterCabin, CarService.TavizSafiBenzin, CarService.ServiceVaskazin, CarService.KilometrServiceBadi));
+            Console.WriteLine(string.Format("CarTag: {0}\nkilometrfeli: {1}\ntarikh: {2}\ntaviz filterroghan: {3}\ntaviz filterhava: {4}\ntaviz filtercabin: {5}\ntaviz safibenzin: {6}\nservice vaskazin: {7}\nkilometr service badi: {8}\nOil Name:{9}\nOil Type:{10}\n",
+                CarTag, CarService.KilometrFeli, CarService.Tarikh, CarService.TavizFilterRoghan, CarService.TavizFilterHava, CarService.TavizFilterCabin, CarService.TavizSafiBenzin, CarService.ServiceVaskazin, CarService.KilometrServiceBadi,CarService.oil.Name,CarService.oil.Type));
         }
         public string ServiceUpdateData()
         {
